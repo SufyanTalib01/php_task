@@ -69,9 +69,61 @@
 
     $a = 1;
     while($a < 10){
-        echo "Sufyan Talib" , "</br>";
+        echo "hello world" , "</br>";
         $a += 1;
     }
+
+    echo "Sufyan Talib" , "</br>";
+    echo "Jibran Talib" , "</br>";
+    echo "Sufyan Talib" , "</br>";
+    goto kashan;
+    echo "Jibran Talib" , "</br>";
+    echo "Sufyan Talib" , "</br>";
+    echo "Jibran Talib" , "</br>";
+    echo "Sufyan Talib" , "</br>";
+    echo "Jibran Talib" , "</br>";
+    echo "Sufyan Talib" , "</br>";
+    echo "Jibran Talib" , "</br>";
+    
+    kashan:
+    echo "Kashan Talib" , "</br>";
+
+    function newFunction($name){
+        echo "hello $name How are you?" , "</br>";
+    }
+
+    newFunction("Yahoo baba");
+    newFunction("sufyan talib");
+    
+    function newDemo($fname="sufyan",$lname="talib"){
+        echo "hello $fname $lname How are you?" , "</br>";
+    }
+    newDemo("jibran","malik");
+
+
+    function check($math , $eng , $chem){
+        $total = $math + $eng + $chem;
+        $per = $total / 3;
+        return $per;
+    }
+    echo check(10 , 10 ,153);
+
+
+    function testing($str){
+        echo "$str nice person";
+    }
+    $string = "Sufyan Talib";
+    testing("Hello WOrld");
+
+    function disply($num){
+        if($num <= 10){
+            echo $num , "</br>";
+            disply($num + 1);
+        }
+    }
+   
+    disply(1);
+    
     ?>
 </body>
 </html>
