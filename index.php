@@ -123,7 +123,46 @@
     }
    
     disply(1);
+
+    $name = "Sufyan is a good boy";
+    echo strlen($name) , "</br>";
+    echo strpos($name , "a") , "</br>";
+    echo strrev($name) , "</br>";
+    echo str_repeat($name , 4)  , "</br>";
+
+    $a = 54;
+    $b = 45;
+
+    echo var_dump($a != $b);
     
+    $arr = ['sufyan' , 'jibran' , 'sadham' , 'amjad' , 'wasay'];
+    echo $arr[0] , "</br>";
+    echo $arr[1] , "</br>";
+    echo $arr[2] , "</br>";
+
+
+    $driveAge = 75;
+
+    if(($driveAge > 25) && ($driveAge < 64)){
+        echo "yes! you can drive your car";
+    }
+    elseif($driveAge < 25){
+        echo "No! you're too young to drive a car";
+    }
+    elseif($driveAge > 65){
+        echo "No sir! you can not drive your car";
+    }
+    else{
+        echo "wait! Who are you?";
+    }
+
+    $a = 0;
+    while($a<=10){
+        echo $a , "</br>";
+        $a++;
+    }
+    $b = 0;
+    if($b<=20);
     ?>
 </body>
 </html>
