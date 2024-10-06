@@ -158,11 +158,42 @@
 
     $a = 0;
     while($a<=10){
-        echo $a , "</br>";
+        echo ($a) , "</br>";
         $a++;
     }
-    $b = 0;
-    if($b<=20);
+
+    $num = 0;
+    for($i = $num ; $i<10 ; $i++){
+        echo "The Value of num is $num </br>";
+        $num++;
+    }
+
+    $arr = array("banana" , "mango" , "apple" , "watermelon");
+    for($i = 0 ; $i<count($arr) ; $i++){
+        echo $arr[$i];
+        echo "</br>";
+    }
+
+    $arr = array("sufyan" , "amjad" , "sadham" , "jibran" , "usama");
+    foreach ($arr as $key => $value) {
+        echo "$value </br>"; 
+    }
+
+    function examMarks($marks){
+        $sum = 0;
+        foreach ($marks as $value) {
+            $sum = ($sum + $value);
+        }
+        return $sum;
+    }
+
+    $sufyan = [80 , 84 ,76 ,98 ,70 , 100];
+    $sufyanmarks = examMarks($sufyan);
+
+    $wasay = [34 , 23 , 54 , 12 , 54 ,43];
+    $wasaymarks = examMarks($wasay);
+    echo "Sufyan Total Marks is $sufyanmarks out of 600 <br>";
+    echo "wasay total marks is $wasaymarks out of 600. very disapointed"
     ?>
 </body>
 </html>
