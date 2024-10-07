@@ -296,7 +296,7 @@
      foreach ($services as $key => $value) {
         echo "$services[$key] <br>";    
      }
-    //  DONE
+    //  DONEE
     ?>
 </body>
 </html>
