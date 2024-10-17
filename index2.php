@@ -294,8 +294,37 @@
 
 
      foreach ($services as $key => $value) {
-        echo "$services[$key] <br>";    
-     }
+        echo $value['name'] ,                        "<br>"; // Use the correct array access syntax
+    }
+
+    $multiDim =     array(
+                                                array(5 ,3 ,2 ,7),
+                                                array(7 ,3, 1, 0),
+                                                array(34 , 21 , 54, 12)
+    );
+    for($i=0; $i < count($multiDim) ; $i++){
+        for($j=0; $j<count($multiDim[$i]); $j++){
+            echo $multiDim[$i][$j];
+            echo " ";
+        }
+        echo "<br>";
+    } 
+
+    // $threeDim = array(
+    //         array(
+    //             array(43 , 56 ,23 ,12 , 54),
+    //             array(23 , 16 ,63 ,12 , 34),
+    //             array(66 , 12 ,2123 ,1565 , 324),
+    //         ),
+    // );
+    // for($i=0 ; $i<count($threeDim) ; $i++){
+    //     for($j=0 ; $j<count($threeDim[$i]; $j++){
+    //         for($k=0 ; $k<count($threeDim[$i][$j]; $k++){
+    //             echo $k
+    //         })
+    //     });
+    // }
+    
     //  DONEE
     ?>
 </body>
