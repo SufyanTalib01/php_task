@@ -19,7 +19,7 @@
 
             echo $sql;
             
-            // $result = mysqli_query($connection , $sql);
+            // $result = mysqli_query($connection , $sql);;
             
 
         }
