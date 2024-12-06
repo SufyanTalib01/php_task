@@ -1,6 +1,7 @@
 <?php 
 
     $insert = false;
+    $update = false;
 
     $servername = "localhost";
     $username = "root";
@@ -8,6 +9,11 @@
     $database = "inotes";
 
     $connection = mysqli_connect($servername , $username , $password , $database);
+
+    if(isset($_GET['delete'])){
+        $sno = $_GET['delete'];
+        echo $sno;
+    }
 
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         if(isset($_POST['snoedit'])){
@@ -17,14 +23,20 @@
 
             $sql = "UPDATE `inotesdata` SET `title` = '$title', `concern` = '$description' WHERE `inotesdata`.`sno` = $sno";
 
-            echo $sql;
+            $result = mysqli_query($connection , $sql);
+            if($result){
+                 $update = true;
+            }
+            else{
+                echo "could not update the record successfully";
+            }
             
-            // $result = mysqli_query($connection , $sql);;
             
 
         }
         else{
-        $title = $_POST['title'];
+
+        $title = isset($_POST['title']) ? $_POST['title'] : $_POST['title2'];
         $description = $_POST['desc'];
 
         $sql = "INSERT INTO `inotesdata` (`title`, `concern`, `dt`) VALUES ('$title', '$description', CURRENT_TIMESTAMP)";
@@ -33,7 +45,9 @@
 
         if($result){
             $insert = true;
+            // header('location:tutorial32.php');
         }
+
         }
     }
     
@@ -50,8 +64,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- JQUERY  -->
-    <script
-  src="https://code.jquery.com/jquery-3.7.1.js"integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
+    <script  src="https://code.jquery.com/jquery-3.7.1.js"integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
 
 
     <!-- DATA TABLES  -->
@@ -71,8 +84,8 @@
         <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="editmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+    <div class="modal fade" id="editmodel" tabindex="-1" role="dialog"      aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Edit Notes</h5>
@@ -144,20 +157,29 @@
   </button>
 </div>';
     }
+    if($update){
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Congratulations</strong> Your data has been Updated;
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>';
+    }
+    
 ?>
 
 <div class="container my-4">
 <form action="/tutorial32.php" method="POST">
   <div class="form-group">
     <label for="title">Name</label>
-    <input required type="text" class="form-control" name="title" id="title"  placeholder="Enter Name">
+    <input required type="text" class="form-control" name="title2" id="title"  placeholder="Enter Name" >
   </div>
   <div class="form-group">
     <label for="desc">Description</label>
     <textarea required class="form-control" name="desc" id="desc"  placeholder="Enter Description" rows="3"></textarea>
   </div>
   
-  <button type="submit" class="btn btn-primary">Add Notes</button>
+  <input type="submit" name="btn-submit" class="btn btn-primary" value="Add">
 </form>
 </div>
 
@@ -188,7 +210,12 @@
       <th scope='row'>" . $sno . "</th>
       <td>" . $row['title'] . "</td>
       <td> " . $row['concern'] . " </td>
-      <td> <button type='button' class='edit btn btn-primary'  data-toggle='modal'  data-target='#editmodel' id=".$row['sno']." >Edit</button> </td>
+      <td> 
+      <button type='button' class='edit btn btn-primary'  data-toggle='modal'  data-target='#editmodel' id=".$row['sno']." >Edit</button>
+      
+      <button type='button' class='delete btn btn-primary'   data-target='#editmodel' id=d".$row['sno']." >Delete</button>
+
+      </td>
     </tr>";
         }
     ?>
@@ -221,9 +248,17 @@
                 console.log(title , description)
                 document.getElementById('modeltitle').value = title;
                 document.getElementById('modeldescription').value = description;
-                console.log(e.target.id);
+                document.getElementById('snoedit').value = e.target.id;    
             })
-        })
+        });
+
+        deletes = document.getElementsByClassName('delete');
+        Array.from(deletes).forEach((element)=>{
+            element.addEventListener("click" , (e)=>{
+                dsno = e.target.id.substr(1,);
+                window.location = `/tutorial32.php?delete=${dsno}`;
+            })
+        });
      </script>
   </body>
 </html>
