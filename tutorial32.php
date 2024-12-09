@@ -2,6 +2,7 @@
 
     $insert = false;
     $update = false;
+    $delete = false;
 
     $servername = "localhost";
     $username = "root";
@@ -12,7 +13,11 @@
 
     if(isset($_GET['delete'])){
         $sno = $_GET['delete'];
-        echo $sno;
+        $sql = "DELETE FROM `inotesdata` WHERE `inotesdata`.`sno` = $sno";
+        $result = mysqli_query($connection , $sql);
+        if($result){
+            $delete = true;
+        }
     }
 
     if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -106,14 +111,14 @@
     <label for="modeldescription">Description</label>
     <textarea type="text" class="form-control" rows="3" name="modeldescription" id="modeldescription" placeholder="Enter Description"></textarea>
   </div>
-  <button type="submit"  class="btn btn-primary">Submit</button>
+  <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
 </form>
 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      
     </div>
   </div>
 </div>
@@ -160,6 +165,14 @@
     if($update){
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
   <strong>Congratulations</strong> Your data has been Updated;
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>';
+    }
+    if($delete){
+        echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
+  <strong>Congratulations!</strong> Your data has been Delete;
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -256,9 +269,14 @@
         Array.from(deletes).forEach((element)=>{
             element.addEventListener("click" , (e)=>{
                 dsno = e.target.id.substr(1,);
-                window.location = `/tutorial32.php?delete=${dsno}`;
-            })
+                if(confirm("Are you sure you want to delete this note?")){
+            window.location = `/tutorial32.php?delete=${dsno}`;
+        }
+
+            });
         });
+
+        
      </script>
   </body>
 </html>
