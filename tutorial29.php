@@ -14,12 +14,12 @@
 
     $result = mysqli_query($connection , $sql);
 
-    $num = mysqli_num_rows($result);
-    echo $num . "<br>";
+    // $num = mysqli_num_rows($result);
+    // echo $num . "<br>";
 
-    while($row = mysqli_fetch_assoc($result)){
-        echo "My name is " . $row['name'] . " and I study in Class " . $row['class'] . " in " . $row['school'];
-        echo "<br>";
-    }
+    // while($row = mysqli_fetch_assoc($result)){
+    //     echo "My name is " . $row['name'] . " and I study in Class " . $row['class'] . " in " . $row['school'];
+    //     echo "<br>";
+    // }
     
 ?>
